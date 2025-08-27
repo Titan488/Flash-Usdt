@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Flash USDT Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #fff;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .card {
+      background: linear-gradient(135deg, #141e30, #243b55);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .price {
+      font-size: 1.2em;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    .bonus {
+      background: #ff9800;
+      color: #000;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      margin-top: 5px;
+      display: inline-block;
+    }
+    button {
+      background: #00c853;
+      border: none;
+      color: white;
+      padding: 10px 18px;
+      margin-top: 15px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: #009624;
+    }
+    .payment-section {
+      background: #1c1c1c;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 40px;
+      display: none;
+    }
+    .address-box {
+      background: #333;
+      padding: 10px;
+      border-radius: 8px;
+      word-break: break-all;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .copy-btn {
+      background: #2196f3;
+      border: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .toast {
+      visibility: hidden;
+      min-width: 200px;
+      margin-left: -100px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 8px;
+      padding: 10px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+      font-size: 14px;
+    }
+    .toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2s;
+    }
+    @keyframes fadein {
+      from {bottom: 0; opacity: 0;}
+      to {bottom: 30px; opacity: 1;}
+    }
+    @keyframes fadeout {
+      from {bottom: 30px; opacity: 1;}
+      to {bottom: 0; opacity: 0;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Flash USDT Shop</h1>
+    <p style="text-align:center;">Buy Flash USDT securely. Select a package below, pay in USDT (BEP20), and receive instantly after verification.</p>
+
+    <div class="products">
+      <div class="card">
+        <h3>Starter Pack</h3>
+        <p class="price">1 USDT → 100K Flash USDT</p>
+        <button onclick="selectPackage('1 USDT', '100K Flash USDT')">Buy Now</button>
+      </div>
+      <div class="card">
+        <h3>Basic Pack</h3>
+        <p class="price">2 USDT → 200K Flash USDT</p>
+        <button onclick="selectPackage('2 USDT', '200K Flash USDT')">Buy Now</button>
+      </div>
+      <div class="card">
+        <h3>Trader Pack</h3>
+        <p class="price">5 USDT → 600K Flash USDT</p>
+        <span class="bonus">+20% Bonus</span>
+        <button onclick="selectPackage('5 USDT', '600K Flash USDT (+20% Bonus)')">Buy Now</button>
+      </div>
+      <div class="card">
+        <h3>Pro Pack</h3>
+        <p class="price">10 USDT → 1.3M Flash USDT</p>
+        <span class="bonus">+30% Bonus</span>
+        <button onclick="selectPackage('10 USDT', '1.3M Flash USDT (+30% Bonus)')">Buy Now</button>
+      </div>
+      <div class="card">
+        <h3>Whale Pack</h3>
+        <p class="price">20 USDT → 3M Flash USDT</p>
+        <span class="bonus">+50% Bonus</span>
+        <button onclick="selectPackage('20 USDT', '3M Flash USDT (+50% Bonus)')">Buy Now</button>
+      </div>
+      <div class="card">
+        <h3>Mega Pack</h3>
+        <p class="price">50 USDT → 8.5M Flash USDT</p>
+        <span class="bonus">+70% Bonus</span>
+        <button onclick="selectPackage('50 USDT', '8.5M Flash USDT (+70% Bonus)')">Buy Now</button>
+      </div>
+      <div class="card">
+        <h3>Ultra Pack</h3>
+        <p class="price">100 USDT → 20M Flash USDT</p>
+        <span class="bonus">+100% Bonus</span>
+        <button onclick="selectPackage('100 USDT', '20M Flash USDT (+100% Bonus)')">Buy Now</button>
+      </div>
+      <div class="card">
+        <h3>Legend Pack</h3>
+        <p class="price">250 USDT → 60M Flash USDT</p>
+        <span class="bonus">+140% Bonus</span>
+        <button onclick="selectPackage('250 USDT', '60M Flash USDT (+140% Bonus)')">Buy Now</button>
+      </div>
+      <div class="card">
+        <h3>God Pack</h3>
+        <p class="price">500 USDT → 150M Flash USDT</p>
+        <span class="bonus">+200% Bonus</span>
+        <button onclick="selectPackage('500 USDT', '150M Flash USDT (+200% Bonus)')">Buy Now</button>
+      </div>
+    </div>
+
+    <div class="payment-section" id="paymentSection">
+      <h2>Complete Your Payment</h2>
+      <p id="orderSummary"></p>
+      <p>Send the exact amount in <b>USDT (BEP20)</b> to the wallet address below:</p>
+      <div class="address-box">
+        <span id="walletAddress">0x93b1e98b04e3a55163A3482aF24C360756dc435D</span>
+        <button class="copy-btn" onclick="copyAddress()">Copy</button>
+      </div>
+      <p style="margin-top:15px;">After payment, submit your <b>Transaction ID</b> & Screenshot to our Telegram bot for verification.</p>
+      <button onclick="redirectToBot()">Submit to Telegram Bot</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Address copied to clipboard</div>
+
+  <script>
+    function selectPackage(price, amount) {
+      document.getElementById('paymentSection').style.display = 'block';
+      document.getElementById('orderSummary').innerText = `Selected Package: ${price} → ${amount}`;
+      window.scrollTo({ top: document.getElementById('paymentSection').offsetTop, behavior: 'smooth' });
+    }
+    function copyAddress() {
+      const addr = document.getElementById("walletAddress").innerText;
+      navigator.clipboard.writeText(addr);
+      const toast = document.getElementById("toast");
+      toast.className = "toast show";
+      setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
+    }
+    function redirectToBot() {
+      window.location.href = "https://t.me/FlashUsdtVaultBot";
+    }
+  </script>
+</body>
+</html>
